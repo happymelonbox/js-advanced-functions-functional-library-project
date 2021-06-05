@@ -16,8 +16,14 @@ const fi = (function() {
       return collection
       // Return the original array
     },
-    map: function() {
-
+    map: function(collection, callback) {
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      let newCollection = []
+      for (let i=0; i<arg.length; i++){
+        let j = callback(arg[i])
+        return newCollection.push(j)
+      }
+      return newCollection
     },
 
     reduce: function() {
