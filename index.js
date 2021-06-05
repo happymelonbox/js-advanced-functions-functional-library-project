@@ -17,11 +17,18 @@ const fi = (function() {
       // Return the original array
     },
     map: function(collection, callback) {
-      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //Ternary operator means that this will work on an object also so in an effort to make this function
+      //work as the original I have commented it out. But handy to have for other things.
+      
+      //const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      // let newCollection = []
+      // for (let i=0; i<arg.length; i++){
+      //   newCollection.push(callback(arg[i]))
+      
       let newCollection = []
-      for (let i=0; i<arg.length; i++){
-        newCollection.push(callback(arg[i]))
-      }
+      for (let i=0; i<collection.length; i++){
+      newCollection.push(callback(collection[i]))
+    }
       return newCollection
     },
 
