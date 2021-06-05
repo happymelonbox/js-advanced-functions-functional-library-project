@@ -38,7 +38,7 @@ const fi = (function() {
         acc = collection[0]
         collection = collection.slice(1)
       }
-      //checks to see if the collection is an object and if so, turns object into an array
+      //checks to see if the collection is an object and if so, turns object into an array, must end with semi-colon
       const arg = Array.isArray(collection) ? collection : Object.values(collection);
       //loops through and calls callback function on each iteration.
       for (let i=0; i<arg.length; i++){
@@ -48,8 +48,16 @@ const fi = (function() {
         return acc
     },
 
-    find: function() {
-
+    find: function(collection, predicate) {
+      //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //loops through array and checks if predicate is equal to current value, if so, stops and returns the current value
+      //if not returns undefined
+      for (let i=0; i<arg.length; i++){
+        if (predicate(arg[i])){
+          return arg[i]
+          return undefined
+      }}
     },
 
 
