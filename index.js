@@ -17,26 +17,38 @@ const fi = (function() {
       // Return the original array
     },
     map: function(collection, callback) {
-      //Ternary operator means that this will work on an object also so in an effort to make this function
-      //work as the original I have commented it out. But handy to have for other things.
-      
-      //const arg = Array.isArray(collection) ? collection : Object.values(collection);
-      // let newCollection = []
-      // for (let i=0; i<arg.length; i++){
-      //   newCollection.push(callback(arg[i]))
-      
+      //Ternary to check if object (must have semi-colon at end to work)
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //New array to assign into
       let newCollection = []
-      for (let i=0; i<collection.length; i++){
-      newCollection.push(callback(collection[i]))
-    }
+      //loop old array and push into new array
+      for (let i=0; i<arg.length; i++){
+      newCollection.push(callback(arg[i]))
+      }
+      //Return new array
       return newCollection
     },
 
-    reduce: function() {
-
+    reduce: function(collection, callback, acc) {
+      //checks to see if accumulator is assigned, if not, assigns the accumulator to the
+      //first value in the provided array and removes the accumulator from the rest of the values
+      // in the array otherwise it adds itself to itself (it would start with the value of collection[0]
+      //but then add collection[0], it needs to start with collection[0] then move on to collection[1])
+      if(acc === NaN || acc === undefined){
+        acc = collection[0]
+        collection = collection.slice(1)
+      }
+      //checks to see if the collection is an object and if so, turns object into an array
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //loops through and calls callback function on each iteration.
+      for (let i=0; i<arg.length; i++){
+        acc = callback(acc, collection[i], collection)
+        }
+      //returns the accumulator
+        return acc
     },
 
-    functions: function() {
+    find: function() {
 
     },
 
