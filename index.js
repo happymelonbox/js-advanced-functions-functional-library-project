@@ -20,8 +20,7 @@ const fi = (function() {
       const arg = Array.isArray(collection) ? collection : Object.values(collection);
       let newCollection = []
       for (let i=0; i<arg.length; i++){
-        let j = callback(arg[i])
-        return newCollection.push(j)
+        newCollection.push(callback(arg[i]))
       }
       return newCollection
     },
