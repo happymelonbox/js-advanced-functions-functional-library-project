@@ -112,11 +112,15 @@ const fi = (function() {
   compact: function(collection){
     //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
     const arg = Array.isArray(collection) ? collection : Object.values(collection);
+    //creates new array for the compact array
     let newArray = []
+    //loops through array
     for (let i=0; i<arg.length; i++){
+    //checks to see if the element is true and if it is, push it to the new array
       if(arg[i])
       newArray.push(arg[i])
     }
+    //returns the new array of true values
     return newArray
   },
 
