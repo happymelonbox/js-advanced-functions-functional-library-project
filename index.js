@@ -139,23 +139,41 @@ const fi = (function() {
       return newArray
   },
 
-  flatten: function(){
-
+  flatten: function(collection, shallow=true){
+    let newArray = []
+    const reduce = function(){
+     //checks to see if accumulator is assigned, if not, assigns the accumulator to the
+      //first value in the provided array and removes the accumulator from the rest of the values
+      // in the array otherwise it adds itself to itself (it would start with the value of collection[0]
+      //but then add collection[0], it needs to start with collection[0] then move on to collection[1])
+      if(acc === NaN || acc === undefined){
+        acc = collection[0]
+        collection = collection.slice(1)
+      }
+      //checks to see if the collection is an object and if so, turns object into an array, must end with semi-colon
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //loops through and calls callback function on each iteration.
+      for (let i=0; i<arg.length; i++){
+        acc = callback(acc, collection[i], collection)
+        }
+      //returns the accumulator
+        return acc
+      }
   },
 
   uniq: function(){
 
   },
 
-  keys: function(){
+  keys: function(obj){
 
   },
 
-  values: function(){
+  values: function(obj){
 
   },
 
-  functions: function(){
+  functions: function(obj){
 
   },
 
