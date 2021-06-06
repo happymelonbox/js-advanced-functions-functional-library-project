@@ -96,11 +96,16 @@ const fi = (function() {
   last: function(collection, n=false){
       //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
     const arg = Array.isArray(collection) ? collection : Object.values(collection);
+    //assigning the end value of the array to end
     let end = arg.slice(arg.length-1)
-    if(n){
+      //if n (starting point) is provided, n will equal to true as a value is equal
+      // to true, and the code will execute, returning the slice containing last elements from starting point n
+      if(n){
       end = arg.slice(arg.length-n, arg.length)
       return end
     }
+    //if n not provided, return the 0th element of end - which only contains one element, the end element that
+    //we sliced and assigned.
     return end[0]
 },
 
