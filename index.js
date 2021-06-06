@@ -60,8 +60,43 @@ const fi = (function() {
       }}
     },
 
+    filter: function(collection, predicate) {
+      //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //loops through array and checks if predicate is equal to current value, if so, stops and returns the current value
+      //if not returns undefined
+      let newArray = []
+      for (let i=0; i<arg.length; i++){
+        if (predicate(arg[i])){
+          newArray.push(arg[i])
+          }
+      }
+      return newArray
+    },
 
-  }
-})()
+    size: function(collection){
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      return arg.length
+    },
+
+    first: function(collection, n=false){
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      if(n){
+        return arg.slice(0, n)
+    }
+    return arg[0]
+  },
+
+  last: function(collection, n=false){
+    const arg = Array.isArray(collection) ? collection : Object.values(collection);
+    let end = arg.slice(arg.length-1)
+    if(n){
+      end = arg.slice(arg.length-n, arg.length)
+      return end
+    }
+    return end[0]
+},
+
+  }})()
 
 fi.libraryMethod()
