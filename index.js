@@ -75,19 +75,26 @@ const fi = (function() {
     },
 
     size: function(collection){
+      //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
       const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //returns the total number of elements  in the array
       return arg.length
     },
 
     first: function(collection, n=false){
+      //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
       const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //if n (starting point) is provided, n will equal to true as a value is equal
+      // to true, and the code will execute, returning the first slice from starting point n
       if(n){
         return arg.slice(0, n)
     }
+    //if n is not supplied, just return the 0th element of the array.
     return arg[0]
   },
 
   last: function(collection, n=false){
+      //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
     const arg = Array.isArray(collection) ? collection : Object.values(collection);
     let end = arg.slice(arg.length-1)
     if(n){
@@ -96,6 +103,18 @@ const fi = (function() {
     }
     return end[0]
 },
+
+  compact: function(collection){
+    //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
+    const arg = Array.isArray(collection) ? collection : Object.values(collection);
+    let newArray = []
+    for (let i=0; i<arg.length; i++){
+      if(arg[i])
+      newArray.push(arg[i])
+    }
+    return newArray
+  },
+
 
   }})()
 
