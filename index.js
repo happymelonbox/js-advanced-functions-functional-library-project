@@ -137,7 +137,29 @@ const fi = (function() {
       newArray.sort(function(a,b){return callback(a)-callback(b)})
       //returns the sorted array leaving original array unchanged
       return newArray
-}
+  },
+
+  flatten: function(){
+
+  },
+
+  uniq: function(){
+
+  },
+
+  keys: function(){
+
+  },
+
+  values: function(){
+
+  },
+
+  functions: function(){
+
+  },
+
+
 }})()
 
 fi.libraryMethod()
