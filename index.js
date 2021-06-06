@@ -124,7 +124,20 @@ const fi = (function() {
     return newArray
   },
 
-
-  }})()
+  sortBy: function(collection, callback){
+      //checks to see if the collection is an object and if so, turns object into an array, must end in semi-colon
+      const arg = Array.isArray(collection) ? collection : Object.values(collection);
+      //creates new array containing a copy of the supplied array using spread operator
+      let newArray = [...arg]
+      //Sorts the array using the compare function on the results of calling callback
+      //on each item of the array. When the sort() function compares two values, it sends the values to
+      //the compare function, and sorts the values according to the returned (negative, zero, positive) value.
+      //If the result is negative a is sorted before b. If the result is positive b is sorted before a.
+      //If the result is 0 no changes are done with the sort order of the two values.
+      newArray.sort(function(a,b){return callback(a)-callback(b)})
+      //returns the sorted array leaving original array unchanged
+      return newArray
+}
+}})()
 
 fi.libraryMethod()
