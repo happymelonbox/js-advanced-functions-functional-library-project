@@ -172,35 +172,31 @@ const fi = (function() {
 
   uniq: function(array, isSorted = false, callback = false){
 
-    function sorting(array){
+    function sorting(array, callback){
       //Sets newArray equal to an array with the first element of the supplied array as the starting element of
       //new array. This sets a starting number for the following function
       sortedArray = [array[0]]
       //loops through the supplied array starting at the second element of the supplied array as we have already
       //set 0 as the starting element in the new array.
       for (let i = 1; i < array.length; i++){
-      //checks if the element before the current iteration is not equal to the current iteration, if it is not,
-      //it pushes that current iteration into the new array
-        if (sorted[i-1] !== array[i]){
-          sortedArray.push(array[i])
+      //checks if the result of calling callback on the element before the current iteration is not equal to 
+      //the result of calling callback on the current iteration, if it is not, it pushes that current iteration 
+      //into the new array
+        if (callback(sorted[i-1]) !== callback(array[i])){
+          sortedArray.push(callback(array[i]))
         }
         return sortedArray
       }
     }
-    function onlyOne(value, index, self){
-      return self.indexOf(value) === index
-    }
-    function uniqueArrayFunc(array){
-      this.filter(array, onlyOne)
-      return array
-    }
+
     let newArray = []
     if (isSorted){
-      newArray = array
+      return sorting(array, callback)
+    } else if (!callback) {
+      return Array.from(new Set(array))
     } else {
-      newArray = array.sort(function(a,b){return a-b})
+      
     }
-    uniqueArrayFunc(newArray)
     return newArray
   },
 
