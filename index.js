@@ -171,7 +171,9 @@ const fi = (function() {
   },
 
   uniq: function(array, isSorted = false, callback = false){
-
+    let newArray = []
+    let computedArray = []
+    let sortedArray = []
     function sorting(array, callback){
       //Sets newArray equal to an array with the first element of the supplied array as the starting element of
       //new array. This sets a starting number for the following function
@@ -179,26 +181,32 @@ const fi = (function() {
       //loops through the supplied array starting at the second element of the supplied array as we have already
       //set 0 as the starting element in the new array.
       for (let i = 1; i < array.length; i++){
-      //checks if the result of calling callback on the element before the current iteration is not equal to 
-      //the result of calling callback on the current iteration, if it is not, it pushes that current iteration 
+      //checks if the result of calling callback on the element before the current iteration is not equal to
+      //the result of calling callback on the current iteration, if it is not, it pushes that current iteration
       //into the new array
-        if (callback(sorted[i-1]) !== callback(array[i])){
-          sortedArray.push(callback(array[i]))
+        if (sortedArray[i-1] !== array[i]){
+          sortedArray.push(array[i])
         }
-        return sortedArray
       }
+      return sortedArray.sort(function(a,b){return a - b})
     }
 
-    let newArray = []
+    function checkIfSorted(){
     if (isSorted){
-      return sorting(array, callback)
-    } else if (!callback) {
-      return Array.from(new Set(array))
+      newArray = Array.from(new Set(array))
     } else {
-      
+      let sorts = sorting(array, callback)
+      newArray = Array.from(new Set(sorts))
     }
-    return newArray
-  },
+  }
+  checkIfSorted()
+    if(callback){
+      for (let x = 0; x<newArray.length; x++){
+        let y = callback(x)
+        return computedArray.push(y)
+      }}
+      return newArray
+    },
 
   keys: function(){
 
