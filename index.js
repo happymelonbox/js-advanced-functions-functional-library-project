@@ -42,7 +42,7 @@ const fi = (function() {
       const arg = Array.isArray(collection) ? collection : Object.values(collection);
       //loops through and calls callback function on each iteration.
       for (let i=0; i<arg.length; i++){
-        acc = callback(acc, collection[i], collection)
+        acc = callback(acc, arg[i], arg)
         }
       //returns the accumulator
         return acc
@@ -139,33 +139,72 @@ const fi = (function() {
       return newArray
   },
 
-  flatten: function(collection, shallow=true){
-    let newArray = []
-    const reduce = function(){
-     //checks to see if accumulator is assigned, if not, assigns the accumulator to the
-      //first value in the provided array and removes the accumulator from the rest of the values
-      // in the array otherwise it adds itself to itself (it would start with the value of collection[0]
-      //but then add collection[0], it needs to start with collection[0] then move on to collection[1])
-      if(acc === NaN || acc === undefined){
-        acc = collection[0]
-        collection = collection.slice(1)
+  flatten: function(collection, shallow = false, storageArray = []){/*Moved storageArray into argument with a default of an empty array, 
+    so that when the function loops, the filled storageArray is passed in as the argument instead of an empty array which is what 
+    happens when you add the variable assignment in the function itself */
+
+    //checks to see if the collection is an object and if so, turns object into an array, must end with semi-colon 
+    /*const arg = Array.isArray(collection) ? collection : Object.values(collection); - Had to remove this from this function
+    as the next part of the function (if !Array) checks arg to see if it is an array, where arg is not, it is a reference to an array*/
+
+    //loops through through the supplied array and pushes the each value into the new array
+    let arg = collection
+    const pushing = function(newArray, oldArray) {
+      for (let value of oldArray) {
+          newArray.push(value);
+      }}
+      if (!Array.isArray(arg)) return storageArray.push(arg)
+      //checks to see if the shallow argument is true, if it is, checks to see if each value in the supplied array is
+      //an array itself, if it is an array is calls the function pushing, if it is not an array it just pushes that value
+      //into the new array.
+      if (shallow) {
+          for (let val of arg)
+              Array.isArray(val) ? pushing(storageArray, val) : storageArray.push(val)
+      } else {
+        //if shallow is not supplied as true it defaults to false and it calls this function on each value of the supplied array
+          for (let val of arg) {
+              this.flatten(val, false, storageArray)
+          }
       }
-      //checks to see if the collection is an object and if so, turns object into an array, must end with semi-colon
-      const arg = Array.isArray(collection) ? collection : Object.values(collection);
-      //loops through and calls callback function on each iteration.
-      for (let i=0; i<arg.length; i++){
-        acc = callback(acc, collection[i], collection)
+      //returns the new array
+    return storageArray
+  },
+
+  uniq: function(array, isSorted = false, callback = false){
+
+    function sorting(array){
+      //Sets newArray equal to an array with the first element of the supplied array as the starting element of
+      //new array. This sets a starting number for the following function
+      sortedArray = [array[0]]
+      //loops through the supplied array starting at the second element of the supplied array as we have already
+      //set 0 as the starting element in the new array.
+      for (let i = 1; i < array.length; i++){
+      //checks if the element before the current iteration is not equal to the current iteration, if it is not,
+      //it pushes that current iteration into the new array
+        if (sorted[i-1] !== array[i]){
+          sortedArray.push(array[i])
         }
-      //returns the accumulator
-        return acc
+        return sortedArray
       }
+    }
+    function onlyOne(value, index, self){
+      return self.indexOf(value) === index
+    }
+    function uniqueArrayFunc(array){
+      this.filter(array, onlyOne)
+      return array
+    }
+    let newArray = []
+    if (isSorted){
+      newArray = array
+    } else {
+      newArray = array.sort(function(a,b){return a-b})
+    }
+    uniqueArrayFunc(newArray)
+    return newArray
   },
 
-  uniq: function(){
-
-  },
-
-  keys: function(obj){
+  keys: function(){
 
   },
 
