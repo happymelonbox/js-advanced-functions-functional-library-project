@@ -174,7 +174,7 @@ const fi = (function() {
     let newArray = []
     let computedArray = []
     let sortedArray = []
-    function sorting(array, callback){
+    function sorting(array){
       //Sets newArray equal to an array with the first element of the supplied array as the starting element of
       //new array. This sets a starting number for the following function
       sortedArray = [array[0]]
@@ -190,23 +190,25 @@ const fi = (function() {
       }
       return sortedArray.sort(function(a,b){return a - b})
     }
-
     function checkIfSorted(){
     if (isSorted){
       newArray = Array.from(new Set(array))
     } else {
-      let sorts = sorting(array, callback)
+      let sorts = sorting(array)
       newArray = Array.from(new Set(sorts))
     }
   }
-  checkIfSorted()
+
+    checkIfSorted()
+
     if(callback){
       for (let x = 0; x<newArray.length; x++){
-        let y = callback(x)
-        return computedArray.push(y)
-      }}
+        let y = x
+        computedArray.push(callback(y))
+      } return Array.from(new Set(computedArray))
+    } else {
       return newArray
-    },
+    }},
 
   keys: function(){
 
