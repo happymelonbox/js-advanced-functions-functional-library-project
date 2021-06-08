@@ -201,11 +201,17 @@ const fi = (function() {
 
     checkIfSorted()
 
+    let modifiedArray = []
+    let originalArray = []
     if(callback){
       for (let x = 0; x<newArray.length; x++){
-        let y = x
-        computedArray.push(callback(y))
-      } return Array.from(new Set(computedArray))
+        let modified = callback(x)
+        let og = newArray[x].value
+        if (og === modified){
+          computedArray.push(og)
+        }
+      }
+      return Array.from(new Set(computedArray))
     } else {
       return newArray
     }},
