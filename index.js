@@ -228,7 +228,13 @@ const fi = (function() {
   },
 
   functions: function(obj){
-
+    let functionsArray = []
+    for (let key in obj){
+      if (typeof obj[key] === "function"){
+        functionsArray.push[key]
+      }
+    }
+    return functionsArray.sort()
   },
 
 
