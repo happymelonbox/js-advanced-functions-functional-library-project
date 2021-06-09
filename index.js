@@ -228,15 +228,16 @@ const fi = (function() {
   },
 
   functions: function(obj){
+    const arg = Object.values(obj);
+console.log(arg)
     let functionsArray = []
-    for (let key in obj){
-      if (typeof obj[key] === "function"){
-        functionsArray.push[key]
+    for (let i = 0; i<arg.length; i++){
+      if (typeof arg[i] === "function"){
+        functionsArray.push(arg[i])
       }
     }
-    return functionsArray.sort()
-  },
-
+    console.log(functionsArray)
+  }
 
 }})()
 
