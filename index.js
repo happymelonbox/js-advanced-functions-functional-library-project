@@ -201,20 +201,19 @@ const fi = (function() {
 
     checkIfSorted()
 
-    let modifiedArray = []
-    let originalArray = []
+    let changedArray = []
+    let theMostUniq = []
     if(callback){
       for (let x = 0; x<newArray.length; x++){
         let modified = callback(x)
-        let og = newArray[x].value
-        if (og === modified){
-          computedArray.push(og)
+        if (!changedArray.includes(modified)){
+          changedArray.push(modified)
+          theMostUniq.push(newArray[x])
         }
-      }
-      return Array.from(new Set(computedArray))
+    }
+    return theMostUniq
     } else {
-      return newArray
-    }},
+    return newArray}},
 
   keys: function(){
 
