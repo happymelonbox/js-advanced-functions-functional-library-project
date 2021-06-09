@@ -175,21 +175,13 @@ const fi = (function() {
     let computedArray = []
     let sortedArray = []
     function sorting(array){
-      //Sets newArray equal to an array with the first element of the supplied array as the starting element of
-      //new array. This sets a starting number for the following function
-      sortedArray = [array[0]]
-      //loops through the supplied array starting at the second element of the supplied array as we have already
-      //set 0 as the starting element in the new array.
-      for (let i = 1; i < array.length; i++){
-      //checks if the result of calling callback on the element before the current iteration is not equal to
-      //the result of calling callback on the current iteration, if it is not, it pushes that current iteration
-      //into the new array
-        if (sortedArray[i-1] !== array[i]){
-          sortedArray.push(array[i])
-        }
-      }
-      return sortedArray.sort(function(a,b){return a - b})
+      sortedArray = array.sort(function(a,b){return a - b})
+      return sortedArray
     }
+
+    //checks if the array is sorted, calls new Set on the original array and sets that as newArray. new Set() returns an array with
+    //no duplicate values. We could also do thhe same as in the sorting() function where we loop through the array and push only 
+    //the value that does not match the value before it, but this is less code
     function checkIfSorted(){
     if (isSorted){
       newArray = Array.from(new Set(array))
