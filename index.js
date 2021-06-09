@@ -172,13 +172,13 @@ const fi = (function() {
 
   uniq: function(array, isSorted = false, callback = false){
     let newArray = []
-    let computedArray = []
     let sortedArray = []
+    let changedArray = []
+    let theMostUniq = []
     function sorting(array){
       sortedArray = array.sort(function(a,b){return a - b})
       return sortedArray
     }
-
     //checks if the array is sorted, calls new Set on the original array and sets that as newArray. new Set() returns an array with
     //no duplicate values. We could also do thhe same as in the sorting() function where we loop through the array and push only 
     //the value that does not match the value before it, but this is less code
@@ -189,12 +189,14 @@ const fi = (function() {
       let sorts = sorting(array)
       newArray = Array.from(new Set(sorts))
     }
-  }
-
+    }
+    //calls check if sorted
     checkIfSorted()
-
-    let changedArray = []
-    let theMostUniq = []
+    //checks to see if callback is supplied, if is is supplied, loops through the array and calls the callback function on the current
+    //iteration of the array and assigns the value to modified. It then checks if the array changedArray, which starts as an empty array,
+    //contains the value that modified is holding, if it does not it pushes the modified value into changedArray and pushes the original
+    //value from the original array into theMostUniq as the requirements want the original value NOT the modified value. If there is no
+    //callback, it returns the original array.
     if(callback){
       for (let x = 0; x<newArray.length; x++){
         let modified = callback(x)
@@ -205,7 +207,9 @@ const fi = (function() {
     }
     return theMostUniq
     } else {
-    return newArray}},
+    return newArray
+    }
+  },
 
   keys: function(){
 
