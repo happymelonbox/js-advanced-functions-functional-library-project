@@ -211,8 +211,12 @@ const fi = (function() {
     }
   },
 
-  keys: function(){
-
+  keys: function(object){
+    let keys = []
+    for (let key in obj){
+      keys.push(key)
+    }
+    return keys
   },
 
   values: function(obj){
