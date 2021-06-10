@@ -213,6 +213,7 @@ const fi = (function() {
 
   keys: function(obj){
     let keys = []
+    //loops thorough obj and pushes the key into the empty array
     for (let key in obj){
       keys.push(key)
     }
@@ -221,6 +222,8 @@ const fi = (function() {
 
   values: function(obj){
     let values = []
+    //loops thorough obj and pushes the value that corresponds to the key of the iteration
+    //into the empty array
     for (let key in obj){
       values.push(obj[key])
     }
