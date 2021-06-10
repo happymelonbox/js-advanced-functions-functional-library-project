@@ -228,15 +228,15 @@ const fi = (function() {
   },
 
   functions: function(obj){
-    const arg = Object.values(obj);
-console.log(arg)
+    const arg = Object.values(obj)
+    const argKeys = Object.keys(obj)
     let functionsArray = []
     for (let i = 0; i<arg.length; i++){
       if (typeof arg[i] === "function"){
-        functionsArray.push(arg[i])
+        functionsArray.push(argKeys[i])
       }
     }
-    console.log(functionsArray)
+    return functionsArray.sort((a,b) => b-a)
   }
 
 }})()
