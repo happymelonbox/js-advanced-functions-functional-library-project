@@ -228,14 +228,20 @@ const fi = (function() {
   },
 
   functions: function(obj){
+    //assigns arg the values of obj
     const arg = Object.values(obj)
+    //assigns argKeys the keys
     const argKeys = Object.keys(obj)
     let functionsArray = []
+    //loops through the values of the obj - arg - and checks
+    //to see if each iteration is a function, if it is a function,
+    //it pushes the corresponding key into the array functionsArray
     for (let i = 0; i<arg.length; i++){
       if (typeof arg[i] === "function"){
         functionsArray.push(argKeys[i])
       }
     }
+    //sorts functionsArray into alphabetical order
     return functionsArray.sort((a,b) => b-a)
   }
 
